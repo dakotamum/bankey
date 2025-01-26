@@ -13,6 +13,7 @@ function App() {
 
   return (
     <>
+    Yooo homi
     {currentPage === "homepage" && <HomePage navigateTo={navigateTo}/>}
     {currentPage === "newgamepage" && <NewGamePage navigateTo={navigateTo}/>}
     {currentPage === "aboutpage" && <AboutPage navigateTo={navigateTo}/>}
