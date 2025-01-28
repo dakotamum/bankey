@@ -37,17 +37,18 @@ function initializeSocketIO(httpServer) {
   io.on("connection", function (socket) {
     console.log("Connection established: ", socket.id);
 
-    // Create a new player object
-    let newPlayer = Player.create(socket.id);
+    // // Create a new player object
+    // let newPlayer = Player.create(socket.id);
     activeClients[socket.id] = {
       socket: socket,
-      player: newPlayer,
+      playerName: socket.id
+    //   player: newPlayer,
     };
 
-    // Notify the client of successful connection
-    socket.emit("connect-ack", {
-      player: newPlayer,
-    });
+    // // Notify the client of successful connection
+    // socket.emit("connect-ack", {
+    //   player: newPlayer,
+    // });
 
     // Handle client disconnection
     socket.on("disconnect", function () {
@@ -55,16 +56,16 @@ function initializeSocketIO(httpServer) {
       notifyDisconnect(socket.id);
     });
 
-    // Handle input messages from the client
-    socket.on("input", function (data) {
-      inputQueue.push({
-        id: socket.id,
-        message: data,
-      });
-    });
+    // // Handle input messages from the client
+    // socket.on("input", function (data) {
+    //   inputQueue.push({
+    //     id: socket.id,
+    //     message: data,
+    //   });
+    // });
 
-    // Notify other clients about the new connection
-    notifyConnect(socket, newPlayer);
+    // // Notify other clients about the new connection
+    // notifyConnect(socket, newPlayer);
   });
 }
 
