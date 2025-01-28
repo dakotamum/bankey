@@ -34,14 +34,14 @@ function initializeSocketIO(httpServer) {
     }
   }
 
-  io.on("connection", function (socket) {
-    console.log("Connection established: ", socket.id);
+  io.on("connect", function (socket) {
+    console.log("Connection established: ", socket.id, "name: ", socket.handshake.query.name);
 
     // // Create a new player object
     // let newPlayer = Player.create(socket.id);
     activeClients[socket.id] = {
       socket: socket,
-      playerName: socket.id
+      playerName: socket.handshake.query.name
     //   player: newPlayer,
     };
 
@@ -53,7 +53,7 @@ function initializeSocketIO(httpServer) {
     // Handle client disconnection
     socket.on("disconnect", function () {
       delete activeClients[socket.id];
-      notifyDisconnect(socket.id);
+    //   notifyDisconnect(socket.id);
     });
 
     // // Handle input messages from the client

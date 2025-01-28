@@ -20,20 +20,20 @@ function App() {
 
     // Connect to the WebSocket server only when the player's name changes
     if (!socket.current) {
-      socket.current = io("http://localhost:3000"); // Replace with your server URL if deployed
+      socket.current = io("http://localhost:3000", { query: { name }}); // Replace with your server URL if deployed
 
       // Emit the player's name to the server
-      socket.current.emit("connection", { playerName: name });
+      // socket.current.emit("connect", { playerName: name });
 
-      // Handle acknowledgment from the server
-      socket.current.on("connect-ack", (data) => {
-        console.log("Acknowledged by server:", data);
-      });
+      // // Handle acknowledgment from the server
+      // socket.current.on("connect-ack", (data) => {
+      //   console.log("Acknowledged by server:", data);
+      // });
 
-      // Listen for any messages from the server
-      socket.current.on("message-from-server", (data) => {
-        console.log("Message from server:", data);
-      });
+      // // Listen for any messages from the server
+      // socket.current.on("message-from-server", (data) => {
+      //   console.log("Message from server:", data);
+      // });
     }
 
     navigateTo("homepage");
