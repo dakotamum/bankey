@@ -1,5 +1,6 @@
 import livereload from "livereload";
 import connectLivereload from "connect-livereload";
+import { initialize } from "./src/server/game.js";
 
 import http from "http";
 import path from "path";
@@ -49,8 +50,11 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(reactBuildPath, "index.html"));
 });
 
+const server = http.createServer(app);
+
 // Start the server
 const port = 3000;
-app.listen(port, "0.0.0.0", () => {
+server.listen(port, () => {
+  initialize(server);
   console.log(`Server is listening on http://localhost:${port}`);
 });

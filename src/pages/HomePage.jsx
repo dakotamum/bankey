@@ -1,13 +1,13 @@
 // import { useState } from 'react'
 import '../App.css'
 
-function HomePage( {navigateTo} ){
+function HomePage( {navigateTo, currentPlayerName} ){
 
   return (
     <>
       <div>
         <div>
-          BANKY
+        Hello {currentPlayerName}!
         </div>
         <div>
           <button onClick={()=> navigateTo("newgamepage")}>
