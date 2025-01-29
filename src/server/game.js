@@ -7,18 +7,17 @@ function initializeSocketIO(httpServer) {
   const activeClients = {}; // Keep track of connected clients
   const inputQueue = []; // Process input messages
 
-  function notifyConnect(socket, newPlayer) {
+  function notifyConnect(socket, newOtherPlayer) {
     for (let id in activeClients) {
       let client = activeClients[id];
-      if (newPlayer.id !== id) {
+      if (socket.id !== id) {
         client.socket.emit("connect-other", {
-          id: newPlayer.id,
-          player: newPlayer,
+          player: newOtherPlayer,
         });
-        socket.emit("connect-other", {
-          id: client.player.id,
-          player: client.player,
-        });
+        // socket.emit("connect-other", {
+        //   id: client.player.id,
+        //   player: client.player,
+        // });
       }
     }
   }
@@ -64,8 +63,8 @@ function initializeSocketIO(httpServer) {
     //   });
     // });
 
-    // // Notify other clients about the new connection
-    // notifyConnect(socket, newPlayer);
+    // Notify other clients about the new connection
+    notifyConnect(socket, socket.handshake.query.name);
   });
 }
 

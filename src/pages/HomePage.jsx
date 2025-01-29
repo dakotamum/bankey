@@ -1,7 +1,7 @@
 // import { useState } from 'react'
 import '../App.css'
 
-function HomePage( {navigateTo, currentPlayerName} ){
+function HomePage( {navigateTo, currentPlayerName, currentOtherPlayers} ){
 
   return (
     <>
@@ -16,6 +16,11 @@ function HomePage( {navigateTo, currentPlayerName} ){
           <button onClick={()=> navigateTo("aboutpage")}>
             About 
           </button>
+        </div>
+        <div>
+          {currentOtherPlayers.map((item, index) => (
+            <span key={index}>{item} </span>
+          ))}
         </div>
       </div>
     </>

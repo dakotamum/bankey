@@ -9,11 +9,16 @@ import "./App.css";
 function App() {
   const [currentPage, setCurrentPage] = useState("startingpage");
   const [currentPlayerName, setPlayerName] = useState("ChonkeyDonks");
+  const [currentOtherPlayers, setCurrentOtherPlayers] = useState([]);
   const socket = useRef(null); // Ref to persist the socket connection
 
   const navigateTo = (page) => {
     setCurrentPage(page);
   };
+
+  const addOtherPlayer = (newPlayer) => {
+    setCurrentOtherPlayers(prev => [...prev, newPlayer]);
+  }
 
   const changePlayerName = (name) => {
     setPlayerName(name);
@@ -30,10 +35,15 @@ function App() {
       //   console.log("Acknowledged by server:", data);
       // });
 
-      // // Listen for any messages from the server
-      // socket.current.on("message-from-server", (data) => {
-      //   console.log("Message from server:", data);
-      // });
+      // Listen for any messages from the server
+      socket.current.on("connect-other", (data) => {
+      setCurrentOtherPlayers(prev => {
+        if (!prev.includes(data.player)) {
+          return [...prev, data.player];
+        }
+        return prev;
+      });
+    });
     }
 
     navigateTo("homepage");
@@ -52,6 +62,7 @@ function App() {
         <HomePage
           navigateTo={navigateTo}
           currentPlayerName={currentPlayerName}
+          currentOtherPlayers={currentOtherPlayers}
         />
       )}
       {currentPage === "newgamepage" && <NewGamePage navigateTo={navigateTo} />}
