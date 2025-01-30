@@ -16,34 +16,26 @@ function App() {
     setCurrentPage(page);
   };
 
-  const addOtherPlayer = (newPlayer) => {
-    setCurrentOtherPlayers(prev => [...prev, newPlayer]);
-  }
-
   const changePlayerName = (name) => {
     setPlayerName(name);
 
     // Connect to the WebSocket server only when the player's name changes
     if (!socket.current) {
-      socket.current = io("http://localhost:3000", { query: { name }}); // Replace with your server URL if deployed
+      socket.current = io("http://localhost:3000", { query: { name }});
 
-      // Emit the player's name to the server
-      // socket.current.emit("connect", { playerName: name });
-
-      // // Handle acknowledgment from the server
-      // socket.current.on("connect-ack", (data) => {
-      //   console.log("Acknowledged by server:", data);
-      // });
-
-      // Listen for any messages from the server
-      socket.current.on("connect-other", (data) => {
-      setCurrentOtherPlayers(prev => {
-        if (!prev.includes(data.player)) {
-          return [...prev, data.player];
-        }
-        return prev;
+        // Listen for any messages from the server
+        socket.current.on("connect-other", (data) => {
+        setCurrentOtherPlayers(prev => {
+          if (!prev.includes(data.player)) {
+            return [...prev, data.player];
+          }
+          return prev;
+        });
       });
-    });
+
+        socket.current.on("disconnect-other", (data) => {
+          setCurrentOtherPlayers(prev => prev.filter(player => player !== data.player));
+      });
     }
 
     navigateTo("homepage");

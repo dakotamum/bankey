@@ -1,11 +1,8 @@
 import { Server } from "socket.io";
 
 function initializeSocketIO(httpServer) {
-  // Initialize socket.io with the HTTP server
   const io = new Server(httpServer);
-
-  const activeClients = {}; // Keep track of connected clients
-  const inputQueue = []; // Process input messages
+  const activeClients = {};
 
   function notifyConnect(socket, newOtherPlayer) {
     for (let id in activeClients) {
@@ -14,20 +11,16 @@ function initializeSocketIO(httpServer) {
         client.socket.emit("connect-other", {
           player: newOtherPlayer,
         });
-        // socket.emit("connect-other", {
-        //   id: client.player.id,
-        //   player: client.player,
-        // });
       }
     }
   }
 
-  function notifyDisconnect(playerId) {
+  function notifyDisconnect(playerId, player) {
     for (let id in activeClients) {
       let client = activeClients[id];
       if (playerId !== id) {
         client.socket.emit("disconnect-other", {
-          id: playerId,
+          player: player
         });
       }
     }
@@ -44,15 +37,10 @@ function initializeSocketIO(httpServer) {
     //   player: newPlayer,
     };
 
-    // // Notify the client of successful connection
-    // socket.emit("connect-ack", {
-    //   player: newPlayer,
-    // });
-
     // Handle client disconnection
     socket.on("disconnect", function () {
+      notifyDisconnect(socket.id, activeClients[socket.id].playerName);
       delete activeClients[socket.id];
-    //   notifyDisconnect(socket.id);
     });
 
     // // Handle input messages from the client
