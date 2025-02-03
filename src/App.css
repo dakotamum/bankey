@@ -1,7 +1,53 @@
 * {
-  background-color: pink;
+  margin: 0;
+  font-family: 'Arial';
+  font-size: 20px;
 }
 
-.button {
-  background-color: green;
+button {
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: blueviolet;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: white;
+}
+
+input {
+  all: unset;
+  text-align: center;
+  border: 1px solid #808080;
+  border-radius: 5px;
+  background-color: white;
+}
+
+input:hover {
+  border: 1px solid black;
+}
+
+.page {
+  background-color: lightgrey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.dialog {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 1em;
+  width: 50%;
+  height: 50%;
+}
+
+.prompt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

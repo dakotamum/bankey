@@ -7,7 +7,7 @@ function AboutPage( {navigateTo} ){
     <>
       <div>
         <div>
-          About
+          Developed by Dakota Mumford
         </div>
         <button onClick={()=> navigateTo("homepage")}>home</button>
       </div>

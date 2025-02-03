@@ -11,12 +11,14 @@ function StartingPage( {navigateTo, currentPlayerName, changePlayerName} ){
 
   return (
     <>
-      <div>
-        <div>
-          What is your name?
+      <div className="page">
+        <div className="dialog">
+          <div className="prompt">
+            What is your name?
+          </div>
+          <input type="text" id="nameinput" defaultValue={currentPlayerName} onChange={(event) => updateInputName(event.target.value)}></input>
+          <button onClick={()=>changePlayerName(currentInputName)}>Join</button>
         </div>
-        <input type="text" id="nameinput" defaultValue={currentPlayerName} onChange={(event) => updateInputName(event.target.value)}></input>
-        <button onClick={()=>changePlayerName(currentInputName)}>submit</button>
       </div>
     </>
   );
