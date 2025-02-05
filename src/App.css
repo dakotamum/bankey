@@ -40,14 +40,19 @@ input:hover {
 
 .dialog {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
   gap: 1em;
-  width: 50%;
+  width: 75%;
   height: 50%;
 }
 
-.prompt {
+.centered-text-box {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.players-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

@@ -1,18 +1,17 @@
-import React /*,{ useState }*/ from 'react'
-import '../App.css'
+import React /*,{ useState }*/ from "react";
+import "../App.css";
 
-function AboutPage( {navigateTo} ){
-
+function AboutPage({ navigateTo }) {
   return (
     <>
-      <div>
-        <div>
-          Developed by Dakota Mumford
+      <div className="page">
+        <div className="dialog">
+          <div className="centered-text-box">Developed by Dakota Mumford</div>
+          <button onClick={() => navigateTo("homepage")}>home</button>
         </div>
-        <button onClick={()=> navigateTo("homepage")}>home</button>
       </div>
     </>
   );
 }
 
-export default AboutPage
+export default AboutPage;
