@@ -10,18 +10,16 @@ button {
   justify-content: center;
   align-items: center;
   background-color: blueviolet;
-  border: 1px solid black;
   border-radius: 5px;
 }
 
 button:hover {
-  background-color: white;
+  background-color: magenta;
 }
 
 input {
   all: unset;
   text-align: center;
-  border: 1px solid #808080;
   border-radius: 5px;
   background-color: white;
 }
@@ -51,8 +49,10 @@ input:hover {
   align-items: center;
 }
 
-.players-list {
-  display: flex;
+.players-list-container {
+  border: 1px solid black;
+  border-radius: 5px;
+  /* display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center; */
 }

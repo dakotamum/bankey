@@ -51,6 +51,9 @@ function initializeSocketIO(httpServer) {
     //   });
     // });
 
+
+    socket.emit("game-state", {players: Object.values(activeClients).map((client) => client.playerName)});
+
     // Notify other clients about the new connection
     notifyConnect(socket, socket.handshake.query.name);
   });

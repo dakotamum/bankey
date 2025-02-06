@@ -1,7 +1,6 @@
-// import { useState } from 'react'
 import "../App.css";
 
-function HomePage({ navigateTo, currentPlayerName, currentOtherPlayers }) {
+function HomePage({ navigateTo, currentPlayerName, allPlayers }) {
   return (
     <>
       <div className="page">
@@ -32,14 +31,14 @@ function HomePage({ navigateTo, currentPlayerName, currentOtherPlayers }) {
           </button>
           <button onClick={() => navigateTo("aboutpage")}>About</button>
           <div
-            className="players-list"
+            className="players-list-container"
             style={{
               gridRow: "2 / span 2",
               gridColumn: "2 / 3",
             }}
           >
-            <div className="centered-text-box">Players List</div>
-            {currentOtherPlayers.map((item, key) => (
+            <div className="centered-text-box" style={{backgroundColor: "magenta", top: 0, fontWeight: "bold"}}>Players List</div>
+            {allPlayers.map((item, key) => (
               <div className="centered-text-box" key={key}>
                 {item}
               </div>
