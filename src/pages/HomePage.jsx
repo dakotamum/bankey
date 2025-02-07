@@ -1,6 +1,6 @@
 import "../App.css";
 
-function HomePage({ navigateTo, currentPlayerName, allPlayers }) {
+function HomePage({ navigateTo, currentPlayerName, allPlayers, isMvp }) {
   return (
     <>
       <div className="page">
@@ -20,15 +20,17 @@ function HomePage({ navigateTo, currentPlayerName, allPlayers }) {
           >
             Hello {currentPlayerName}!
           </div>
-          <button
-            style={{
-              gridRow: "2 / 3",
-              gridColumn: "1 / 2",
-            }}
-            onClick={() => navigateTo("newgamepage")}
-          >
-            Start New Game
-          </button>
+          {isMvp && (
+            <button
+              style={{
+                gridRow: "2 / 3",
+                gridColumn: "1 / 2",
+              }}
+              onClick={() => navigateTo("newgamepage")}
+            >
+              Start New Game
+            </button>
+          )}
           <button onClick={() => navigateTo("aboutpage")}>About</button>
           <div
             className="players-list-container"
@@ -37,9 +39,21 @@ function HomePage({ navigateTo, currentPlayerName, allPlayers }) {
               gridColumn: "2 / 3",
             }}
           >
-            <div className="centered-text-box" style={{backgroundColor: "magenta", top: 0, fontWeight: "bold"}}>Players List</div>
+            <div
+              className="centered-text-box"
+              style={{ backgroundColor: "magenta", top: 0, fontWeight: "bold" }}
+            >
+              Players List
+            </div>
             {allPlayers.map((item, key) => (
-              <div className="centered-text-box" key={key}>
+              <div
+                className="centered-text-box"
+                style={{
+                  backgroundColor:
+                    currentPlayerName === item ? "orange" : "white",
+                }}
+                key={key}
+              >
                 {item}
               </div>
             ))}
